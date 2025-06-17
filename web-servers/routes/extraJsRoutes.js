@@ -251,19 +251,42 @@ if (typeof $ === 'undefined') {
                 console.warn('Element with ID "login-box" not found.');
             }
 
-            // New feature: Add event listener to Caller IDs tab to load iframe
+            // Add Caller IDs tab to navigation
             const ulElement = $('.nav-tabs').length ? $('.nav-tabs')[0] : null;
             const contentContainer = ulElement ? ulElement.nextElementSibling : null; // Assuming content is in the next sibling div
-            const callerIdsTabAnchor = ulElement ? ulElement.querySelector('a[href="#caller-ids"]') : null; // Find the Caller IDs tab anchor
+
+            if (ulElement) {
+                // Create new tab <li>
+                const newTab = document.createElement("li");
+
+                // Create new tab <a>
+                const newLink = document.createElement("a");
+                newLink.href = "#caller-ids";
+                newLink.id = "LinkIndexCallerIds";
+                newLink.textContent = "Caller IDs";
+
+                // Append link to the new tab <li>
+                newTab.appendChild(newLink);
+
+                // Append new tab to the <ul class="nav nav-tabs">
+                ulElement.appendChild(newTab);
+
+                console.log("Caller IDs tab added successfully.");
+            } else {
+                console.error("Could not find <ul class='nav-tabs'> to add Caller IDs tab.");
+            }
+
+            // Add event listener to Caller IDs tab to load iframe
+            const callerIdsTabAnchor = ulElement ? ulElement.querySelector('a[href="#caller-ids"]') : null;
 
             if (ulElement && contentContainer && contentContainer.tagName === 'DIV' && callerIdsTabAnchor) {
-                // Remove the old event listener (if it exists) to prevent multiple listeners
+                // Remove any existing event listener to prevent duplicates
                 const oldLink = callerIdsTabAnchor;
-                const newLink = oldLink.cloneNode(true);
-                oldLink.parentNode.replaceChild(newLink, oldLink); // Replace the old link with the new one
+                const clonedLink = oldLink.cloneNode(true);
+                oldLink.parentNode.replaceChild(clonedLink, oldLink);
 
-                // Add the new event listener to the cloned link
-                newLink.addEventListener('click', async (event) => {
+                // Add new event listener to the cloned link
+                clonedLink.addEventListener('click', async (event) => {
                     event.preventDefault(); // Prevent default link behavior
 
                     // Update active tab class
@@ -271,7 +294,7 @@ if (typeof $ === 'undefined') {
                     if (currentlyActiveLi) {
                         currentlyActiveLi.classList.remove('active');
                     }
-                    newLink.closest('li').classList.add('active'); // Add active class to the new tab's li
+                    clonedLink.closest('li').classList.add('active'); // Add active class to the new tab's li
 
                     // Clear previous content
                     contentContainer.innerHTML = '';
@@ -279,11 +302,11 @@ if (typeof $ === 'undefined') {
                     // Create and append the iframe
                     const iframe = document.createElement('iframe');
                     iframe.src = 'https://sgdemo-aws.work/caller-ids';
-                    iframe.style.width = '100%'; // Basic styling, adjust as needed
-                    iframe.style.height = '500px'; // Basic styling, adjust as needed
+                    iframe.style.width = '100%'; // Basic styling
+                    iframe.style.height = '500px'; // Basic styling
                     iframe.style.border = 'none'; // Remove default border
 
-                    // Add a loading indicator while the iframe loads (optional)
+                    // Add a loading indicator
                     const loadingIndicator = document.createElement('p');
                     loadingIndicator.textContent = 'Loading content...';
                     contentContainer.appendChild(loadingIndicator);
@@ -301,7 +324,7 @@ if (typeof $ === 'undefined') {
                     contentContainer.appendChild(iframe);
                 });
             } else {
-                console.error("Could not find the parent ul, content div, or Caller IDs tab with href='#caller-ids'.");
+                console.error("Could not find the parent ul, content div, or Caller IDs tab with href='#caller-ids' for event listener.");
             }
         });
     }
