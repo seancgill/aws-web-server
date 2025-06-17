@@ -1,0 +1,2 @@
+[Mon Jun 09 00:00:05.725482 2025] [mpm_event:notice] [pid 219742:tid 219742] AH00489: Apache/2.4.63 (Ubuntu) mod_fcgid/2.3.9 OpenSSL/3.0.2 configured -- resuming normal operations
+[Mon Jun 09 00:00:05.725557 2025] [core:notice] [pid 219742:tid 219742] AH00094: Command line: '/usr/sbin/apache2'

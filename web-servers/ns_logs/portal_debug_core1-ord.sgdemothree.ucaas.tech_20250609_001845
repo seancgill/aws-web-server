@@ -1,0 +1,10 @@
+2025-06-08 17:18:16 Debug: {
+    "message": "(sbus vendor curl) result: ",
+    "data": {
+        "api curlUrl": "https:\/\/localhost\/ns-api\/?object=token&action=read",
+        "api curlMethod": "get",
+        "api curlResponseCode": "200",
+        "api curlResponseTime": "11"
+    }
+}
+

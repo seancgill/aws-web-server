@@ -1,0 +1,1473 @@
+{"data":{"object":"messagesession","last_timestamp NOT":"0000-00-00 00:00:00","order":"last_timestamp desc","last_timestamp >=":"2025-06-08 00:18:41","OR":[{"queue_status":"queued"},{"queue_status":"dispatching"},{"queue_status":"active"}]},"requestParams":{"params":{"plugin":null,"controller":"messages","action":"processQueuedSMS","named":{"form":{"object":"sms","action":"processQueuedSMS"}},"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":[],"query":{"object":"sms","action":"processQueuedSMS"},"url":"messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS"}}
+
+2025-06-09 00:18:41 Debug: (Messagesession) query 
+{"data":{"conditions":{"last_timestamp NOT":"0000-00-00 00:00:00","last_timestamp >=":"2025-06-08 00:18:41","OR":[{"queue_status":"queued"},{"queue_status":"dispatching"},{"queue_status":"active"}]},"order":"last_timestamp desc"}}
+
+2025-06-09 00:18:41 Debug: (Nssql::_execute) SQL script execution
+SELECT `Messagesession`.`session_id`, `Messagesession`.`user`, `Messagesession`.`domain`, `Messagesession`.`remote`, `Messagesession`.`smsani`, `Messagesession`.`last_timestamp`, `Messagesession`.`start_timestamp`, `Messagesession`.`last_mesg`, `Messagesession`.`last_sender`, `Messagesession`.`last_status`, `Messagesession`.`muted`, `Messagesession`.`last_email`, `Messagesession`.`rx_hostname`, `Messagesession`.`term_queue`, `Messagesession`.`queue_status`, `Messagesession`.`queue_session_id`, `Messagesession`.`agent_start_timestamp`, `Messagesession`.`last_mesg_type`, `Messagesession`.`last_mesg_media_type`, `Messagesession`.`last_mesg_media_size`, `Messagesession`.`session_type`, `Messagesession`.`session_name`, `Messagesession`.`participants` FROM `MessagingDomain`.`session` AS `Messagesession` WHERE NOT (`last_timestamp` = '0000-00-00 00:00:00') AND `last_timestamp` >= '2025-06-08 00:18:41' AND ((`queue_status` = 'queued') OR (`queue_status` = 'dispatching') OR (`queue_status` = 'active')) ORDER BY `last_timestamp` desc
+
+2025-06-09 00:18:41 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:46 Debug: (Apis.dispatch) form 
+{"data":{"object":"reseller","action":"insight"},"requestParams":{"params":{"plugin":null,"controller":"apis","action":"dispatch","named":[],"pass":[]},"data":[],"query":{"object":"reseller","action":"insight"},"url":"","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/"}}
+
+2025-06-09 00:18:46 Debug: (Resellers.index) formZ 
+{"data":{"object":"reseller","action":"insight","apiVer":"v1","format":"xml"},"requestParams":{"params":{"plugin":null,"controller":"resellers","action":"index","named":[],"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":{"form":{"object":"reseller","action":"insight"}},"query":{"object":"reseller","action":"insight"},"url":"resellers","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/resellers"}}
+
+2025-06-09 00:18:46 Debug: (Nssql::_execute) SQL script execution
+SELECT territory,COUNT( * ) as users, COUNT(DISTINCT domain) as domains FROM subscriber_config JOIN domains_config ON domains_config.`domain` = subscriber_config.`aor_host` where subscriber_config.srv_code NOT LIKE 'system-%' group by territory
+
+2025-06-09 00:18:46 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:46 Debug: (Nssql::_execute) SQL script execution
+SELECT territory, COUNT(domain) as domains FROM domains_config group by `territory`
+
+2025-06-09 00:18:46 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:46 Debug: (Nssql::_execute) SQL script execution
+SELECT territory,SUM( `countForLimit`) as countForLimit,SUM( `countExternal`) as countExternal from domains_config group by territory
+
+2025-06-09 00:18:46 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:46 Debug: (Reseller) query 
+{"data":[]}
+
+2025-06-09 00:18:46 Debug: (Nssql::_execute) SQL script execution
+SELECT `Reseller`.`territory_id`, `Reseller`.`territory`, `Reseller`.`description`, `Reseller`.`entry_status`, `Reseller`.`smtp_host`, `Reseller`.`smtp_port`, `Reseller`.`smtp_uid`, `Reseller`.`smtp_pwd` FROM `SiPbxDomain`.`territories` AS `Reseller` WHERE 1 = 1
+
+2025-06-09 00:18:46 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:51 Debug: sev-test-comp 
+{"data":{"tmpFile":{"adapterType":"local","adapterConfig":{"basePath":"\/tmp\/upload\/","syncSbus":"1","dirCreateMode":"493","fileCreateMode":"420"}},"mmsFile":{"adapterType":"local","adapterConfig":{"basePath":"\/usr\/local\/NetSapiens\/SiPbx\/media\/","syncSbus":"1","dirCreateMode":"488","fileCreateMode":"416"}},"dlFile":{"adapterType":"local","adapterConfig":{"basePath":"\/var\/www\/html\/mdl\/","syncSbus":"1","dirCreateMode":"488","fileCreateMode":"416"}}}}
+
+2025-06-09 00:18:51 Messaging: (Messages.read_messagesessions) form 
+{"data":{"return":"1","queue_status":["queued","dispatching","active"],"action":"processQueuedSMS","agent":"agentcheck"},"requestParams":{"params":{"plugin":null,"controller":"messages","action":"processQueuedSMS","named":{"form":{"object":"sms","action":"processQueuedSMS"}},"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":[],"query":{"object":"sms","action":"processQueuedSMS"},"url":"messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS"}}
+
+2025-06-09 00:18:51 Messaging: this is messagesession read conditions: 
+{"data":{"object":"messagesession","last_timestamp NOT":"0000-00-00 00:00:00","order":"last_timestamp desc","last_timestamp >=":"2025-06-08 00:18:51","OR":[{"queue_status":"queued"},{"queue_status":"dispatching"},{"queue_status":"active"}]},"requestParams":{"params":{"plugin":null,"controller":"messages","action":"processQueuedSMS","named":{"form":{"object":"sms","action":"processQueuedSMS"}},"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":[],"query":{"object":"sms","action":"processQueuedSMS"},"url":"messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS"}}
+
+2025-06-09 00:18:51 Debug: (Messagesession) query 
+{"data":{"conditions":{"last_timestamp NOT":"0000-00-00 00:00:00","last_timestamp >=":"2025-06-08 00:18:51","OR":[{"queue_status":"queued"},{"queue_status":"dispatching"},{"queue_status":"active"}]},"order":"last_timestamp desc"}}
+
+2025-06-09 00:18:51 Debug: (Nssql::_execute) SQL script execution
+SELECT `Messagesession`.`session_id`, `Messagesession`.`user`, `Messagesession`.`domain`, `Messagesession`.`remote`, `Messagesession`.`smsani`, `Messagesession`.`last_timestamp`, `Messagesession`.`start_timestamp`, `Messagesession`.`last_mesg`, `Messagesession`.`last_sender`, `Messagesession`.`last_status`, `Messagesession`.`muted`, `Messagesession`.`last_email`, `Messagesession`.`rx_hostname`, `Messagesession`.`term_queue`, `Messagesession`.`queue_status`, `Messagesession`.`queue_session_id`, `Messagesession`.`agent_start_timestamp`, `Messagesession`.`last_mesg_type`, `Messagesession`.`last_mesg_media_type`, `Messagesession`.`last_mesg_media_size`, `Messagesession`.`session_type`, `Messagesession`.`session_name`, `Messagesession`.`participants` FROM `MessagingDomain`.`session` AS `Messagesession` WHERE NOT (`last_timestamp` = '0000-00-00 00:00:00') AND `last_timestamp` >= '2025-06-08 00:18:51' AND ((`queue_status` = 'queued') OR (`queue_status` = 'dispatching') OR (`queue_status` = 'active')) ORDER BY `last_timestamp` desc
+
+2025-06-09 00:18:51 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:51 V2access: POST v2/domains/trainingdomain2/users/2005/calls (207.45.79.249) 
+
+2025-06-09 00:18:51 Debug: (Calls.index) formZ 
+{"data":{"synchronous":"no","object":"call","uid":"2005@trainingdomain2","action":"call","singular":"0","application":"call","orig_user":"2005@trainingdomain2","auto":"yes","callid":"43056983401183194861954386","term_user":"2158344766","ani":"2674336189","cbani":"2674336189","controller":"calls","format":"json","apiVer":"v2"},"requestParams":{"params":{"plugin":null,"controller":"calls","action":"index","named":{"apiVer":"v2","serialized":"a%3A13%3A%7Bs%3A11%3A%22synchronous%22%3Bs%3A2%3A%22no%22%3Bs%3A6%3A%22object%22%3Bs%3A4%3A%22call%22%3Bs%3A3%3A%22uid%22%3Bs%3A20%3A%222005%40trainingdomain2%22%3Bs%3A6%3A%22action%22%3Bs%3A4%3A%22call%22%3Bs%3A8%3A%22singular%22%3Bi%3A0%3Bs%3A11%3A%22application%22%3Bs%3A4%3A%22call%22%3Bs%3A9%3A%22orig_user%22%3Bs%3A20%3A%222005%40trainingdomain2%22%3Bs%3A4%3A%22auto%22%3Bs%3A3%3A%22yes%22%3Bs%3A6%3A%22callid%22%3Bs%3A26%3A%2243056983401183194861954386%22%3Bs%3A9%3A%22term_user%22%3Bs%3A10%3A%222158344766%22%3Bs%3A3%3A%22ani%22%3Bs%3A10%3A%222674336189%22%3Bs%3A5%3A%22cbani%22%3Bs%3A10%3A%222674336189%22%3Bs%3A10%3A%22controller%22%3Bs%3A5%3A%22calls%22%3B%7D"},"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1,"isAjax":false},"data":{"synchronous":"no","dial-rule-application":"call","call-orig-user":"2005@trainingdomain2","auto-answer-enabled":"yes","call-id":"43056983401183194861954386","call-term-user":"2158344766","caller-id-number":"2674336189","callback-caller-id-number":"2674336189"},"query":{"url":"v2\/domains\/trainingdomain2\/users\/2005\/calls"},"url":"calls\/index\/apiVer:v2\/serialized:a%253A13%253A%257Bs%253A11%253A%2522synchronous%2522%253Bs%253A2%253A%2522no%2522%253Bs%253A6%253A%2522object%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A3%253A%2522uid%2522%253Bs%253A20%253A%25222005%2540trainingdomain2%2522%253Bs%253A6%253A%2522action%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A8%253A%2522singular%2522%253Bi%253A0%253Bs%253A11%253A%2522application%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A9%253A%2522orig_user%2522%253Bs%253A20%253A%25222005%2540trainingdomain2%2522%253Bs%253A4%253A%2522auto%2522%253Bs%253A3%253A%2522yes%2522%253Bs%253A6%253A%2522callid%2522%253Bs%253A26%253A%252243056983401183194861954386%2522%253Bs%253A9%253A%2522term_user%2522%253Bs%253A10%253A%25222158344766%2522%253Bs%253A3%253A%2522ani%2522%253Bs%253A10%253A%25222674336189%2522%253Bs%253A5%253A%2522cbani%2522%253Bs%253A10%253A%25222674336189%2522%253Bs%253A10%253A%2522controller%2522%253Bs%253A5%253A%2522calls%2522%253B%257D","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/calls\/index\/apiVer:v2\/serialized:a%253A13%253A%257Bs%253A11%253A%2522synchronous%2522%253Bs%253A2%253A%2522no%2522%253Bs%253A6%253A%2522object%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A3%253A%2522uid%2522%253Bs%253A20%253A%25222005%2540trainingdomain2%2522%253Bs%253A6%253A%2522action%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A8%253A%2522singular%2522%253Bi%253A0%253Bs%253A11%253A%2522application%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A9%253A%2522orig_user%2522%253Bs%253A20%253A%25222005%2540trainingdomain2%2522%253Bs%253A4%253A%2522auto%2522%253Bs%253A3%253A%2522yes%2522%253Bs%253A6%253A%2522callid%2522%253Bs%253A26%253A%252243056983401183194861954386%2522%253Bs%253A9%253A%2522term_user%2522%253Bs%253A10%253A%25222158344766%2522%253Bs%253A3%253A%2522ani%2522%253Bs%253A10%253A%25222674336189%2522%253Bs%253A5%253A%2522cbani%2522%253Bs%253A10%253A%25222674336189%2522%253Bs%253A10%253A%2522controller%2522%253Bs%253A5%253A%2522calls%2522%253B%257D"}}
+
+2025-06-09 00:18:52 Debug: (Nssql::_execute) SQL script execution
+SELECT `Apikey`.`key_id`, `Apikey`.`parent_key`, `Apikey`.`description`, `Apikey`.`hash`, `Apikey`.`ip_address`, `Apikey`.`scope`, `Apikey`.`user`, `Apikey`.`domain`, `Apikey`.`territory`, `Apikey`.`readonly`, `Apikey`.`can_create_keys`, `Apikey`.`allowed-models`, `Apikey`.`created_datetime`, `Apikey`.`lastused_datetime` FROM `NsApi`.`api_keys` AS `Apikey` WHERE `key_id` = 'nss_ho5Sb2eB' LIMIT 1
+
+2025-06-09 00:18:52 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:52 Debug: Cache record [9] for *@* not found
+
+2025-06-09 00:18:52 Debug: (Calls.call) form 
+{"data":{"synchronous":"no","object":"call","uid":"2005@trainingdomain2","action":"call","singular":"0","application":"call","orig_user":"2005@trainingdomain2","auto":"yes","callid":"43056983401183194861954386","term_user":"2158344766","ani":"2674336189","cbani":"2674336189","controller":"calls","format":"json","apiVer":"v2","domain":"trainingdomain2","user":"2005"},"requestParams":{"params":{"plugin":null,"controller":"calls","action":"index","named":{"apiVer":"v2","serialized":"a%3A13%3A%7Bs%3A11%3A%22synchronous%22%3Bs%3A2%3A%22no%22%3Bs%3A6%3A%22object%22%3Bs%3A4%3A%22call%22%3Bs%3A3%3A%22uid%22%3Bs%3A20%3A%222005%40trainingdomain2%22%3Bs%3A6%3A%22action%22%3Bs%3A4%3A%22call%22%3Bs%3A8%3A%22singular%22%3Bi%3A0%3Bs%3A11%3A%22application%22%3Bs%3A4%3A%22call%22%3Bs%3A9%3A%22orig_user%22%3Bs%3A20%3A%222005%40trainingdomain2%22%3Bs%3A4%3A%22auto%22%3Bs%3A3%3A%22yes%22%3Bs%3A6%3A%22callid%22%3Bs%3A26%3A%2243056983401183194861954386%22%3Bs%3A9%3A%22term_user%22%3Bs%3A10%3A%222158344766%22%3Bs%3A3%3A%22ani%22%3Bs%3A10%3A%222674336189%22%3Bs%3A5%3A%22cbani%22%3Bs%3A10%3A%222674336189%22%3Bs%3A10%3A%22controller%22%3Bs%3A5%3A%22calls%22%3B%7D"},"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1,"isAjax":false},"data":{"synchronous":"no","dial-rule-application":"call","call-orig-user":"2005@trainingdomain2","auto-answer-enabled":"yes","call-id":"43056983401183194861954386","call-term-user":"2158344766","caller-id-number":"2674336189","callback-caller-id-number":"2674336189"},"query":{"url":"v2\/domains\/trainingdomain2\/users\/2005\/calls"},"url":"calls\/index\/apiVer:v2\/serialized:a%253A13%253A%257Bs%253A11%253A%2522synchronous%2522%253Bs%253A2%253A%2522no%2522%253Bs%253A6%253A%2522object%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A3%253A%2522uid%2522%253Bs%253A20%253A%25222005%2540trainingdomain2%2522%253Bs%253A6%253A%2522action%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A8%253A%2522singular%2522%253Bi%253A0%253Bs%253A11%253A%2522application%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A9%253A%2522orig_user%2522%253Bs%253A20%253A%25222005%2540trainingdomain2%2522%253Bs%253A4%253A%2522auto%2522%253Bs%253A3%253A%2522yes%2522%253Bs%253A6%253A%2522callid%2522%253Bs%253A26%253A%252243056983401183194861954386%2522%253Bs%253A9%253A%2522term_user%2522%253Bs%253A10%253A%25222158344766%2522%253Bs%253A3%253A%2522ani%2522%253Bs%253A10%253A%25222674336189%2522%253Bs%253A5%253A%2522cbani%2522%253Bs%253A10%253A%25222674336189%2522%253Bs%253A10%253A%2522controller%2522%253Bs%253A5%253A%2522calls%2522%253B%257D","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/calls\/index\/apiVer:v2\/serialized:a%253A13%253A%257Bs%253A11%253A%2522synchronous%2522%253Bs%253A2%253A%2522no%2522%253Bs%253A6%253A%2522object%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A3%253A%2522uid%2522%253Bs%253A20%253A%25222005%2540trainingdomain2%2522%253Bs%253A6%253A%2522action%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A8%253A%2522singular%2522%253Bi%253A0%253Bs%253A11%253A%2522application%2522%253Bs%253A4%253A%2522call%2522%253Bs%253A9%253A%2522orig_user%2522%253Bs%253A20%253A%25222005%2540trainingdomain2%2522%253Bs%253A4%253A%2522auto%2522%253Bs%253A3%253A%2522yes%2522%253Bs%253A6%253A%2522callid%2522%253Bs%253A26%253A%252243056983401183194861954386%2522%253Bs%253A9%253A%2522term_user%2522%253Bs%253A10%253A%25222158344766%2522%253Bs%253A3%253A%2522ani%2522%253Bs%253A10%253A%25222674336189%2522%253Bs%253A5%253A%2522cbani%2522%253Bs%253A10%253A%25222674336189%2522%253Bs%253A10%253A%2522controller%2522%253Bs%253A5%253A%2522calls%2522%253B%257D"}}
+
+2025-06-09 00:18:52 Debug: (Call.mapApiToSbus) object 
+{"data":{"uid":"2005@trainingdomain2","callid":"43056983401183194861954386","origination":"2005@trainingdomain2","destination":"sip:2158344766@trainingdomain2","auto":"yes","cbani":"2674336189","ani":"2674336189"}}
+
+2025-06-09 00:18:52 Debug: (Nssql::_execute) SQL script execution
+DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '20250609001852059267-fde4d3ff76bdc015dd6d3704521f87c3' && `term_callid` = '43056983401183194861954386';
+
+2025-06-09 00:18:52 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:52 Debug: (Nssql::_execute) SQL script execution
+DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '43056983401183194861954386' && `term_callid` = '20250609001852059267-fde4d3ff76bdc015dd6d3704521f87c3';
+
+2025-06-09 00:18:52 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:52 Debug: (Nssql::_execute) SQL script execution
+DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '20250609001852059267-fde4d3ff76bdc015dd6d3704521f87c3' && `term_callid` = '43056983401183194861954386' && `term_to_uri` = 'sip:2005wp@trainingdomain2';
+
+2025-06-09 00:18:52 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:52 Debug: (Nssql::_execute) SQL script execution
+REPLACE INTO `SiPbxDomain`.`activecalls` SET `hostname` = 'core1-ord.sgdemothree.ucaas.tech', `sessionId` = '20250609001852059266', `orig_callid` = '20250609001852059267-fde4d3ff76bdc015dd6d3704521f87c3', `orig_leg_tag` = '', `orig_ip` = '172.16.2.11', `orig_match` = '2005@trainingdomain2', `orig_sub` = '2005', `orig_sub_name` = 'Call Center Agent', `orig_domain` = 'trainingdomain2', `orig_own_sub` = '', `orig_own_domain` = '', `orig_type` = '', `orig_group` = '', `orig_site` = 'Training Site', `orig_territory` = 'training_reseller2', `orig_from_uri` = 'Call-To-Talk', `orig_logi_uri` = 'sip:2005@trainingdomain2', `orig_from_name` = 'Call Center Agent', `orig_from_user` = 'Call-To-Talk', `orig_from_host` = '', `orig_req_uri` = '', `orig_req_user` = '2005', `orig_req_host` = 'trainingdomain2', `orig_to_uri` = 'sip:2005@trainingdomain2', `orig_to_user` = '2005', `orig_to_host` = 'trainingdomain2', `by_action` = 'ForwardSRing', `by_sub` = '2005', `by_domain` = 'trainingdomain2', `by_type` = '', `by_group` = '', `by_site` = 'Training Site', `by_territory` = 'training_reseller2', `by_uri` = '', `by_callid` = '43056983401183194861954386', `term_callid` = '43056983401183194861954386', `term_leg_tag` = '', `term_ip` = '', `term_match` = 'sip:2005wp@trainingdomain2', `term_sub` = '2005', `term_domain` = 'trainingdomain2', `term_own_sub` = '2005', `term_own_domain` = 'trainingdomain2', `term_type` = 'device', `term_group` = '', `term_site` = 'Training Site', `term_territory` = 'training_reseller2', `term_to_uri` = 'sip:2005wp@trainingdomain2', `term_logi_uri` = 'sip:2005@trainingdomain2', `time_start` = '2025-06-09 00:18:52', `time_ringing` = '2025-06-09 00:18:52', `orig_id` = '2673763799', `term_id` = '2673763799', `by_id` = '2673763799', `orig_call_info` = 'progressing', `term_call_info` = 'alerting', `route_to` = 'sip:*@*', `route_class` = '0', `media` = '', `pac` = '', `action_parameter` = '', `action_by` = '', `notes` = '', `unknownHeaders` = '', `time_refresh` = '2025-06-09 00:18:52';
+
+2025-06-09 00:18:52 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '20250609001852059267-fde4d3ff76bdc015dd6d3704521f87c3' && `term_callid` = '43056983401183194861954386' && `term_to_uri` = 'sip:2005wp@trainingdomain2';
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '43056983401183194861954386' && `term_callid` = '43056983401183194861954386' && `term_to_uri` = 'sip:2005@trainingdomain2';REPLACE INTO `SiPbxDomain`.`activecalls` SET `hostname` = 'core1-ord.sgdemothree.ucaas.tech', `sessionId` = '20250609001852059266', `orig_callid` = '43056983401183194861954386', `orig_leg_tag` = '256w7065SToOjRmT00F815', `orig_ip` = '172.16.2.11', `orig_match` = '2005@trainingdomain2', `orig_sub` = '2005', `orig_sub_name` = 'Call Center Agent', `orig_domain` = 'trainingdomain2', `orig_own_sub` = '', `orig_own_domain` = '', `orig_type` = 'device', `orig_group` = '', `orig_site` = 'Training Site', `orig_territory` = 'training_reseller2', `orig_from_uri` = 'Call-To-Talk', `orig_logi_uri` = 'sip:2005@trainingdomain2', `orig_from_name` = 'Call Center Agent', `orig_from_user` = 'Call-To-Talk', `orig_from_host` = '', `orig_req_uri` = '', `orig_req_user` = '2005', `orig_req_host` = 'trainingdomain2', `orig_to_uri` = 'sip:2005@trainingdomain2', `orig_to_user` = '2005', `orig_to_host` = 'trainingdomain2', `by_action` = 'ForwardSRing', `by_sub` = '2005', `by_domain` = 'trainingdomain2', `by_type` = '', `by_group` = '', `by_site` = 'Training Site', `by_territory` = 'training_reseller2', `by_uri` = '', `by_callid` = '43056983401183194861954386', `term_callid` = '43056983401183194861954386', `term_leg_tag` = '', `term_ip` = '', `term_match` = 'sip:2005wp@trainingdomain2', `term_sub` = '2005', `term_domain` = 'trainingdomain2', `term_own_sub` = '2005', `term_own_domain` = 'trainingdomain2', `term_type` = 'device', `term_group` = '', `term_site` = 'Training Site', `term_territory` = 'training_reseller2', `term_to_uri` = 'sip:2005wp@trainingdomain2', `term_logi_uri` = 'sip:2005@trainingdomain2', `time_start` = '2025-06-09 00:18:52', `time_ringing` = '2025-06-09 00:18:52', `time_answer` = '2025-06-09 00:18:59', `orig_id` = '2673763799', `term_id` = '2673763799', `by_id` = '2673763799', `orig_call_info` = 'active', `term_call_info` = 'active', `route_to` = 'sip:*@*', `route_class` = '0', `media` = 'PCMU', `pac` = '', `action_parameter` = '', `action_by` = '', `notes` = '', `unknownHeaders` = '', `time_refresh` = '2025-06-09 00:18:59';
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '43056983401183194861954386' && `term_callid` = '43056983401183194861954386' && `term_to_uri` = 'sip:2005wp@trainingdomain2';
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '43056983401183194861954386' && `term_callid` = '43056983401183194861954386' && `term_to_uri` = 'sip:2005wp@trainingdomain2';DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '43056983401183194861954386' && `term_callid` = '20250609001859059268-fde4d3ff76bdc015dd6d3704521f87c3' && `term_to_uri` = 'sip:12158344766@commio-sbc.ucaas.tech';REPLACE INTO `SiPbxDomain`.`activecalls` SET `hostname` = 'core1-ord.sgdemothree.ucaas.tech', `sessionId` = '20250609001852059266', `orig_callid` = '43056983401183194861954386', `orig_leg_tag` = '256w7065SToOjRmT00F815', `orig_ip` = '', `orig_match` = '2005@trainingdomain2', `orig_sub` = '2005', `orig_sub_name` = 'Call Center Agent', `orig_domain` = 'trainingdomain2', `orig_own_sub` = '', `orig_own_domain` = '', `orig_type` = 'device', `orig_group` = '', `orig_site` = 'Training Site', `orig_territory` = 'training_reseller2', `orig_from_uri` = 'sip:2005wp@trainingdomain2', `orig_logi_uri` = 'sip:2005@trainingdomain2', `orig_from_name` = 'Call Center Agent', `orig_from_user` = '2005wp', `orig_from_host` = 'trainingdomain2', `orig_req_uri` = 'sip:j7cjrveq@qtti9cf8n27q.invalid', `orig_req_user` = 'j7cjrveq', `orig_req_host` = 'qtti9cf8n27q.invalid', `orig_to_uri` = 'sip:2158344766@trainingdomain2', `orig_to_user` = '2158344766', `orig_to_host` = 'trainingdomain2', `by_action` = 'ForwardSRing', `by_sub` = '2005', `by_domain` = 'trainingdomain2', `by_type` = '', `by_group` = '', `by_site` = 'Training Site', `by_territory` = 'training_reseller2', `by_uri` = '', `by_callid` = '43056983401183194861954386', `term_callid` = '20250609001859059268-fde4d3ff76bdc015dd6d3704521f87c3', `term_leg_tag` = '', `term_ip` = '64.181.194.104', `term_match` = 'sip:*@commio-sbc.ucaas.tech', `term_sub` = '', `term_domain` = '', `term_own_sub` = '', `term_own_domain` = '*', `term_type` = 'gateway', `term_group` = '', `term_site` = '', `term_territory` = '', `term_to_uri` = 'sip:12158344766@commio-sbc.ucaas.tech', `term_logi_uri` = 'sip:2158344766@trainingdomain2', `time_start` = '2025-06-09 00:18:59', `orig_id` = '2673763799', `term_id` = '12158344766', `by_id` = '2673763799', `orig_call_info` = 'progressing', `term_call_info` = 'alerting', `route_to` = 'sip:1??????????@*', `route_class` = '0', `media` = 'PCMU', `pac` = '', `action_parameter` = '', `action_by` = '', `notes` = '', `unknownHeaders` = '', `time_refresh` = '2025-06-09 00:18:59';
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'nfr' AND `Systemevent`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'nfr' AND `Systemevent`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'nfr' AND `Systemevent`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+UPDATE `SiPbxDomain`.`element_domain` SET `app_address` = '172.16.2.12:9995', `element_id` = 'nfr', `element_start_time` = 'Thu, 29 May 2025 01:46:26 GMT', `element_status` = 'Running', `element_type` = 'NFR', `element_version` = 'v44-3-0', `hostname` = 'core2-ord.sgdemothree.ucaas.tech', `ip_address` = '172.16.2.12', `mac_address` = '02:00:17:02:3B:D7', `status_update_time` = 'Mon, 09 Jun 2025 00:18:59 GMT' WHERE `SiPbxDomain`.`element_domain`.`element_id` = 'nfr' AND `SiPbxDomain`.`element_domain`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '43056983401183194861954386' && `term_callid` = '20250609001859059268-fde4d3ff76bdc015dd6d3704521f87c3' && `term_to_uri` = 'sip:12158344766@commio-sbc.ucaas.tech';
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '43056983401183194861954386' && `term_callid` = '20250609001859059270-fde4d3ff76bdc015dd6d3704521f87c3' && `term_to_uri` = 'sip:12158344766@a.icr.commio.com';REPLACE INTO `SiPbxDomain`.`activecalls` SET `hostname` = 'core1-ord.sgdemothree.ucaas.tech', `sessionId` = '20250609001852059266', `orig_callid` = '43056983401183194861954386', `orig_leg_tag` = '256w7065SToOjRmT00F815', `orig_ip` = '', `orig_match` = '2005@trainingdomain2', `orig_sub` = '2005', `orig_sub_name` = 'Call Center Agent', `orig_domain` = 'trainingdomain2', `orig_own_sub` = '', `orig_own_domain` = '', `orig_type` = 'device', `orig_group` = '', `orig_site` = 'Training Site', `orig_territory` = 'training_reseller2', `orig_from_uri` = 'sip:2005wp@trainingdomain2', `orig_logi_uri` = 'sip:2005@trainingdomain2', `orig_from_name` = 'Call Center Agent', `orig_from_user` = '2005wp', `orig_from_host` = 'trainingdomain2', `orig_req_uri` = 'sip:j7cjrveq@qtti9cf8n27q.invalid', `orig_req_user` = 'j7cjrveq', `orig_req_host` = 'qtti9cf8n27q.invalid', `orig_to_uri` = 'sip:2158344766@trainingdomain2', `orig_to_user` = '2158344766', `orig_to_host` = 'trainingdomain2', `by_action` = 'ForwardSRing', `by_sub` = '2005', `by_domain` = 'trainingdomain2', `by_type` = '', `by_group` = '', `by_site` = 'Training Site', `by_territory` = 'training_reseller2', `by_uri` = '', `by_callid` = '43056983401183194861954386', `term_callid` = '20250609001859059270-fde4d3ff76bdc015dd6d3704521f87c3', `term_leg_tag` = '', `term_ip` = '192.81.236.32', `term_match` = 'sip:*@a.icr.commio.com', `term_sub` = '', `term_domain` = '', `term_own_sub` = 'domain', `term_own_domain` = '*', `term_type` = 'gateway', `term_group` = '', `term_site` = '', `term_territory` = '', `term_to_uri` = 'sip:12158344766@a.icr.commio.com', `term_logi_uri` = 'sip:2158344766@trainingdomain2', `time_start` = '2025-06-09 00:18:59', `orig_id` = '2673763799', `term_id` = '12158344766', `by_id` = '2673763799', `orig_call_info` = 'progressing', `term_call_info` = 'alerting', `route_to` = '', `route_class` = '', `media` = 'PCMU', `pac` = '', `action_parameter` = '', `action_by` = '', `notes` = '', `unknownHeaders` = '', `time_refresh` = '2025-06-09 00:18:59';
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '43056983401183194861954386' && `term_callid` = '43056983401183194861954386' && `term_to_uri` = 'sip:2005wp@trainingdomain2';
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script execution
+DELETE FROM `SiPbxDomain`.`activecalls` WHERE `hostname` = 'core1-ord.sgdemothree.ucaas.tech' && `orig_callid` = '43056983401183194861954386' && `term_callid` = '20250609001859059270-fde4d3ff76bdc015dd6d3704521f87c3' && `term_to_uri` = 'sip:12158344766@a.icr.commio.com';
+
+2025-06-09 00:18:59 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:01 Debug: (Apikey) query 
+{"data":{"fields":["key_id"]}}
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script execution
+SELECT `Apikey`.`key_id` FROM `NsApi`.`api_keys` AS `Apikey` WHERE 1 = 1
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:01 Debug: (Apikey.nsUpdate) pDbParameters 
+{"data":{"key_id":"nss_ho5Sb2eB","lastused_datetime":"2025-06-09T00:19:01+00:00"}}
+
+2025-06-09 00:19:01 Debug: (Apikey.mapApiToSbus) object 
+{"data":{"key_id":"nss_ho5Sb2eB","lastused_datetime":"2025-06-09T00:19:01+00:00"}}
+
+2025-06-09 00:19:01 Debug: sev-test-comp 
+{"data":{"tmpFile":{"adapterType":"local","adapterConfig":{"basePath":"\/tmp\/upload\/","syncSbus":"1","dirCreateMode":"493","fileCreateMode":"420"}},"mmsFile":{"adapterType":"local","adapterConfig":{"basePath":"\/usr\/local\/NetSapiens\/SiPbx\/media\/","syncSbus":"1","dirCreateMode":"488","fileCreateMode":"416"}},"dlFile":{"adapterType":"local","adapterConfig":{"basePath":"\/var\/www\/html\/mdl\/","syncSbus":"1","dirCreateMode":"488","fileCreateMode":"416"}}}}
+
+2025-06-09 00:19:01 Messaging: (Messages.read_messagesessions) form 
+{"data":{"return":"1","queue_status":["queued","dispatching","active"],"action":"processQueuedSMS","agent":"agentcheck"},"requestParams":{"params":{"plugin":null,"controller":"messages","action":"processQueuedSMS","named":{"form":{"object":"sms","action":"processQueuedSMS"}},"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":[],"query":{"object":"sms","action":"processQueuedSMS"},"url":"messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS"}}
+
+2025-06-09 00:19:01 Messaging: this is messagesession read conditions: 
+{"data":{"object":"messagesession","last_timestamp NOT":"0000-00-00 00:00:00","order":"last_timestamp desc","last_timestamp >=":"2025-06-08 00:19:01","OR":[{"queue_status":"queued"},{"queue_status":"dispatching"},{"queue_status":"active"}]},"requestParams":{"params":{"plugin":null,"controller":"messages","action":"processQueuedSMS","named":{"form":{"object":"sms","action":"processQueuedSMS"}},"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":[],"query":{"object":"sms","action":"processQueuedSMS"},"url":"messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS"}}
+
+2025-06-09 00:19:01 Debug: (Messagesession) query 
+{"data":{"conditions":{"last_timestamp NOT":"0000-00-00 00:00:00","last_timestamp >=":"2025-06-08 00:19:01","OR":[{"queue_status":"queued"},{"queue_status":"dispatching"},{"queue_status":"active"}]},"order":"last_timestamp desc"}}
+
+2025-06-09 00:19:01 Debug: (Apis.dispatch) form 
+{"data":{"object":"email","action":"notify_unread_messages"},"requestParams":{"params":{"plugin":null,"controller":"apis","action":"dispatch","named":[],"pass":[]},"data":[],"query":{"object":"email","action":"notify_unread_messages"},"url":"","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/"}}
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script execution
+SELECT `Messagesession`.`session_id`, `Messagesession`.`user`, `Messagesession`.`domain`, `Messagesession`.`remote`, `Messagesession`.`smsani`, `Messagesession`.`last_timestamp`, `Messagesession`.`start_timestamp`, `Messagesession`.`last_mesg`, `Messagesession`.`last_sender`, `Messagesession`.`last_status`, `Messagesession`.`muted`, `Messagesession`.`last_email`, `Messagesession`.`rx_hostname`, `Messagesession`.`term_queue`, `Messagesession`.`queue_status`, `Messagesession`.`queue_session_id`, `Messagesession`.`agent_start_timestamp`, `Messagesession`.`last_mesg_type`, `Messagesession`.`last_mesg_media_type`, `Messagesession`.`last_mesg_media_size`, `Messagesession`.`session_type`, `Messagesession`.`session_name`, `Messagesession`.`participants` FROM `MessagingDomain`.`session` AS `Messagesession` WHERE NOT (`last_timestamp` = '0000-00-00 00:00:00') AND `last_timestamp` >= '2025-06-08 00:19:01' AND ((`queue_status` = 'queued') OR (`queue_status` = 'dispatching') OR (`queue_status` = 'active')) ORDER BY `last_timestamp` desc
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 1ms]
+
+2025-06-09 00:19:01 Debug: (Mailers.index) formZ 
+{"data":{"object":"email","action":"notify_unread_messages","apiVer":"v1","format":"xml"},"requestParams":{"params":{"plugin":null,"controller":"mailers","action":"index","named":[],"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":{"form":{"object":"email","action":"notify_unread_messages"}},"query":{"object":"email","action":"notify_unread_messages"},"url":"mailers","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/mailers"}}
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script execution
+SELECT * FROM MessagingDomain.session where last_status LIKE 'unread' AND last_sender <> concat(user, '@', domain) AND last_timestamp > date_sub(utc_timestamp(), interval 6 hour) AND last_timestamp < date_sub(utc_timestamp(), interval 5 minute) AND (last_timestamp <> last_email OR last_email is null) AND (rx_hostname is NULL OR rx_hostname = 'core1-ord.sgdemothree.ucaas.tech');
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:01 Debug: (Apis.eventUpdate) event 
+{"data":{"key_id":"nss_ho5Sb2eB","lastused_datetime":"2025-06-09T00:19:01+00:00","apikey":"","object":"apikey"},"requestParams":{"params":{"plugin":null,"controller":"apis","action":"event","named":[],"pass":[]},"data":[],"query":{"url":"api_events"},"url":"api_events","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/api_events"}}
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `NsApi`.`api_keys` AS `Apikey` WHERE `Apikey`.`key_id` = 'nss_ho5Sb2eB'
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `NsApi`.`api_keys` AS `Apikey` WHERE `Apikey`.`key_id` = 'nss_ho5Sb2eB'
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `NsApi`.`api_keys` AS `Apikey` WHERE `Apikey`.`key_id` = 'nss_ho5Sb2eB'
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script execution
+UPDATE `NsApi`.`api_keys` SET `key_id` = 'nss_ho5Sb2eB', `lastused_datetime` = '2025-06-09T00:19:01+00:00' WHERE `NsApi`.`api_keys`.`key_id` = 'nss_ho5Sb2eB'
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:01 Debug: (Apis.dispatch) form 
+{"data":{"object":"reseller","action":"insight"},"requestParams":{"params":{"plugin":null,"controller":"apis","action":"dispatch","named":[],"pass":[]},"data":[],"query":{"object":"reseller","action":"insight"},"url":"","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/"}}
+
+2025-06-09 00:19:01 Debug: (Resellers.index) formZ 
+{"data":{"object":"reseller","action":"insight","apiVer":"v1","format":"xml"},"requestParams":{"params":{"plugin":null,"controller":"resellers","action":"index","named":[],"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":{"form":{"object":"reseller","action":"insight"}},"query":{"object":"reseller","action":"insight"},"url":"resellers","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/resellers"}}
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script execution
+SELECT territory,COUNT( * ) as users, COUNT(DISTINCT domain) as domains FROM subscriber_config JOIN domains_config ON domains_config.`domain` = subscriber_config.`aor_host` where subscriber_config.srv_code NOT LIKE 'system-%' group by territory
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script execution
+SELECT territory, COUNT(domain) as domains FROM domains_config group by `territory`
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script execution
+SELECT territory,SUM( `countForLimit`) as countForLimit,SUM( `countExternal`) as countExternal from domains_config group by territory
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:01 Debug: (Reseller) query 
+{"data":[]}
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script execution
+SELECT `Reseller`.`territory_id`, `Reseller`.`territory`, `Reseller`.`description`, `Reseller`.`entry_status`, `Reseller`.`smtp_host`, `Reseller`.`smtp_port`, `Reseller`.`smtp_uid`, `Reseller`.`smtp_pwd` FROM `SiPbxDomain`.`territories` AS `Reseller` WHERE 1 = 1
+
+2025-06-09 00:19:01 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:02 Debug: (Apis.dispatch) form 
+{"data":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"},"requestParams":{"params":{"plugin":null,"controller":"apis","action":"dispatch","named":[],"pass":[]},"data":[],"query":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"},"url":"","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/"}}
+
+2025-06-09 00:19:02 Debug: (Cdrs2.index) formZ 
+{"data":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200","apiVer":"v1"},"requestParams":{"params":{"plugin":null,"controller":"cdrs2","action":"index","named":[],"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":{"form":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"}},"query":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"},"url":"cdrs2","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/cdrs2"}}
+
+2025-06-09 00:19:02 Debug: this is form: 
+{"data":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200","apiVer":"v1","domain":"trainingdomain2","user":"2005","start_date":"2025-04-09 00:00:00","end_date":"2025-06-09 23:59:59"},"requestParams":{"params":{"plugin":null,"controller":"cdrs2","action":"index","named":[],"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":{"form":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"}},"query":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"},"url":"cdrs2","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/cdrs2"}}
+
+2025-06-09 00:19:02 Debug: (Cdrs2.conditions) $form
+{"data":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200","apiVer":"v1","domain":"trainingdomain2","user":"2005","start_date":"2025-04-09 00:00:00","end_date":"2025-06-09 23:59:59","start":"0","is_asc":"false"},"requestParams":{"params":{"plugin":null,"controller":"cdrs2","action":"index","named":[],"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":{"form":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"}},"query":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"},"url":"cdrs2","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/cdrs2"}}
+
+2025-06-09 00:19:02 Debug: (Cdrs2.conditions) $array
+{"data":{"uid":"uid","cdr_id":"cdr_id","type":"type","time_start":"time_start","time_answer":"time_answer","time_release":"time_release","duration":"duration","orig_to_uri":"orig_to_uri","number":"number","name":"name","onnet":"onnet","hide":"hide","tag":"tag","transcription_job_id":"transcription_job_id","sentiment_positive_percent":"sentiment_positive_percent","sentiment_neutral_percent":"sentiment_neutral_percent","sentiment_negative_percent":"sentiment_negative_percent","ending_sentiment":"ending_sentiment","top_topics":"top_topics"},"requestParams":{"params":{"plugin":null,"controller":"cdrs2","action":"index","named":[],"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":{"form":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"}},"query":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"},"url":"cdrs2","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/cdrs2"}}
+
+2025-06-09 00:19:02 Debug: (Nssql::_execute) SQL script execution
+SELECT `CdrU`.`uid`, `CdrU`.`domain`, `CdrU`.`cdr_id`, `CdrU`.`type`, `CdrU`.`time_start`, `CdrU`.`time_answer`, `CdrU`.`time_release`, `CdrU`.`duration`, `CdrU`.`orig_to_uri`, `CdrU`.`number`, `CdrU`.`name`, `CdrU`.`onnet`, `CdrU`.`hide`, `CdrU`.`tag`, `CdrU`.`transcription_job_id`, `CdrU`.`sentiment_positive_percent`, `CdrU`.`sentiment_neutral_percent`, `CdrU`.`sentiment_negative_percent`, `CdrU`.`ending_sentiment`, `CdrU`.`top_topics` FROM `CdrDomain`.`202506_u` AS `CdrU` WHERE ((`uid` = '2005@trainingdomain2') AND (`hide` = 0) AND (`time_start` >= 1744156800) AND (`time_start` < 1749513599)) ORDER BY `time_start` DESC LIMIT 200
+
+2025-06-09 00:19:02 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Debug: (Cdrs2.conditions) $form
+{"data":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200","apiVer":"v1","domain":"trainingdomain2","user":"2005","start_date":"2025-04-09 00:00:00","end_date":"2025-06-09 23:59:59","start":"0","is_asc":"false"},"requestParams":{"params":{"plugin":null,"controller":"cdrs2","action":"index","named":[],"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":{"form":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"}},"query":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"},"url":"cdrs2","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/cdrs2"}}
+
+2025-06-09 00:19:02 Debug: (Cdrs2.conditions) $array
+{"data":{"uid":"uid","cdr_id":"cdr_id","type":"type","time_start":"time_start","time_answer":"time_answer","time_release":"time_release","duration":"duration","orig_to_uri":"orig_to_uri","number":"number","name":"name","onnet":"onnet","hide":"hide","tag":"tag","transcription_job_id":"transcription_job_id","sentiment_positive_percent":"sentiment_positive_percent","sentiment_neutral_percent":"sentiment_neutral_percent","sentiment_negative_percent":"sentiment_negative_percent","ending_sentiment":"ending_sentiment","top_topics":"top_topics"},"requestParams":{"params":{"plugin":null,"controller":"cdrs2","action":"index","named":[],"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":{"form":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"}},"query":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"},"url":"cdrs2","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/cdrs2"}}
+
+2025-06-09 00:19:02 Debug: (Nssql::_execute) SQL script execution
+SELECT `CdrU`.`uid`, `CdrU`.`domain`, `CdrU`.`cdr_id`, `CdrU`.`type`, `CdrU`.`time_start`, `CdrU`.`time_answer`, `CdrU`.`time_release`, `CdrU`.`duration`, `CdrU`.`orig_to_uri`, `CdrU`.`number`, `CdrU`.`name`, `CdrU`.`onnet`, `CdrU`.`hide`, `CdrU`.`tag`, `CdrU`.`transcription_job_id`, `CdrU`.`sentiment_positive_percent`, `CdrU`.`sentiment_neutral_percent`, `CdrU`.`sentiment_negative_percent`, `CdrU`.`ending_sentiment`, `CdrU`.`top_topics` FROM `CdrDomain`.`202505_u` AS `CdrU` WHERE ((`uid` = '2005@trainingdomain2') AND (`hide` = 0) AND (`time_start` >= 1744156800) AND (`time_start` < 1749513599)) ORDER BY `time_start` DESC LIMIT 200
+
+2025-06-09 00:19:02 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: orig_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1136]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1136
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Notice: Notice (8): Undefined index: term_callid in [/usr/local/NetSapiens/netsapiens-api/Controller/Cdrs2Controller.php, line 1137]
+Trace:
+ErrorHandler::handleError() - CORE/Cake/Error/ErrorHandler.php, line 230
+Cdrs2Controller::addExtraData() - APP/Controller/Cdrs2Controller.php, line 1137
+Cdrs2Controller::createModel() - APP/Controller/Cdrs2Controller.php, line 1322
+Cdrs2Controller::read() - APP/Controller/Cdrs2Controller.php, line 646
+AppController::index() - APP/Controller/AppController.php, line 965
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+CakeObject::requestAction() - CORE/Cake/Core/CakeObject.php, line 104
+ApisController::dispatch() - APP/Controller/ApisController.php, line 508
+ReflectionMethod::invokeArgs() - [internal], line ??
+Controller::invokeAction() - CORE/Cake/Controller/Controller.php, line 499
+Dispatcher::_invoke() - CORE/Cake/Routing/Dispatcher.php, line 193
+Dispatcher::dispatch() - CORE/Cake/Routing/Dispatcher.php, line 167
+[main] - APP/webroot/index.php, line 120
+
+2025-06-09 00:19:02 Debug: (Cdrs2.conditions) $form
+{"data":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200","apiVer":"v1","domain":"trainingdomain2","user":"2005","start_date":"2025-04-09 00:00:00","end_date":"2025-06-09 23:59:59","start":"0","is_asc":"false"},"requestParams":{"params":{"plugin":null,"controller":"cdrs2","action":"index","named":[],"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":{"form":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"}},"query":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"},"url":"cdrs2","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/cdrs2"}}
+
+2025-06-09 00:19:02 Debug: (Cdrs2.conditions) $array
+{"data":{"uid":"uid","cdr_id":"cdr_id","type":"type","time_start":"time_start","time_answer":"time_answer","time_release":"time_release","duration":"duration","orig_to_uri":"orig_to_uri","number":"number","name":"name","onnet":"onnet","hide":"hide","tag":"tag","transcription_job_id":"transcription_job_id","sentiment_positive_percent":"sentiment_positive_percent","sentiment_neutral_percent":"sentiment_neutral_percent","sentiment_negative_percent":"sentiment_negative_percent","ending_sentiment":"ending_sentiment","top_topics":"top_topics"},"requestParams":{"params":{"plugin":null,"controller":"cdrs2","action":"index","named":[],"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":{"form":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"}},"query":{"object":"cdr2","action":"read","uid":"2005@trainingdomain2","format":"json","limit":"200"},"url":"cdrs2","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/cdrs2"}}
+
+2025-06-09 00:19:02 Debug: (Nssql::_execute) SQL script execution
+SELECT `CdrU`.`uid`, `CdrU`.`domain`, `CdrU`.`cdr_id`, `CdrU`.`type`, `CdrU`.`time_start`, `CdrU`.`time_answer`, `CdrU`.`time_release`, `CdrU`.`duration`, `CdrU`.`orig_to_uri`, `CdrU`.`number`, `CdrU`.`name`, `CdrU`.`onnet`, `CdrU`.`hide`, `CdrU`.`tag`, `CdrU`.`transcription_job_id`, `CdrU`.`sentiment_positive_percent`, `CdrU`.`sentiment_neutral_percent`, `CdrU`.`sentiment_negative_percent`, `CdrU`.`ending_sentiment`, `CdrU`.`top_topics` FROM `CdrDomain`.`202504_u` AS `CdrU` WHERE ((`uid` = '2005@trainingdomain2') AND (`hide` = 0) AND (`time_start` >= 1744156800) AND (`time_start` < 1749513599)) ORDER BY `time_start` DESC LIMIT 200
+
+2025-06-09 00:19:02 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:05 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'nfr' AND `Systemevent`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:05 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:05 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'nfr' AND `Systemevent`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:05 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:05 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'nfr' AND `Systemevent`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:05 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:05 Debug: (Nssql::_execute) SQL script execution
+UPDATE `SiPbxDomain`.`element_domain` SET `app_address` = '172.16.2.11:9995', `element_id` = 'nfr', `element_start_time` = 'Thu, 29 May 2025 01:36:02 GMT', `element_status` = 'Running', `element_type` = 'NFR', `element_version` = 'v44-3-0', `hostname` = 'core1-ord.sgdemothree.ucaas.tech', `ip_address` = '172.16.2.11', `mac_address` = '02:00:17:02:31:BA', `status_update_time` = 'Mon, 09 Jun 2025 00:19:05 GMT' WHERE `SiPbxDomain`.`element_domain`.`element_id` = 'nfr' AND `SiPbxDomain`.`element_domain`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:05 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:06 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'sipbx' AND `Systemevent`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:06 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:06 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'sipbx' AND `Systemevent`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:06 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:06 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'sipbx' AND `Systemevent`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:06 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:06 Debug: (Nssql::_execute) SQL script execution
+UPDATE `SiPbxDomain`.`element_domain` SET `app_address` = '172.16.2.11:5060', `app_address_v6` = '[2603:c028:4505:1d00::8713]:5060', `element_id` = 'sipbx', `element_start_time` = 'Thu, 29 May 2025 01:38:35 GMT', `element_status` = 'Running', `element_type` = 'SiPBx', `element_version` = 'v44-3-0', `hostname` = 'core1-ord.sgdemothree.ucaas.tech', `ip_address` = '172.16.2.11', `mac_address` = '02:00:17:02:31:BA', `status_update_time` = 'Mon, 09 Jun 2025 00:19:06 GMT', `wan_address` = '170.9.227.139:5060' WHERE `SiPbxDomain`.`element_domain`.`element_id` = 'sipbx' AND `SiPbxDomain`.`element_domain`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:06 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:07 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'ncs' AND `Systemevent`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:07 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:07 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'ncs' AND `Systemevent`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:07 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:07 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'ncs' AND `Systemevent`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:07 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:07 Debug: (Nssql::_execute) SQL script execution
+UPDATE `SiPbxDomain`.`element_domain` SET `app_address` = '172.16.2.11:5081', `element_id` = 'ncs', `element_start_time` = 'Thu, 29 May 2025 01:38:38 GMT', `element_status` = 'Running', `element_type` = 'NCS', `element_version` = 'v44-3-0', `hostname` = 'core1-ord.sgdemothree.ucaas.tech', `ip_address` = '172.16.2.11', `mac_address` = '02:00:17:02:31:BA', `status_update_time` = 'Mon, 09 Jun 2025 00:19:07 GMT', `wan_address` = '172.16.2.11:5081' WHERE `SiPbxDomain`.`element_domain`.`element_id` = 'ncs' AND `SiPbxDomain`.`element_domain`.`mac_address` = '02:00:17:02:31:BA'
+
+2025-06-09 00:19:07 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'ncs' AND `Systemevent`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'ncs' AND `Systemevent`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'ncs' AND `Systemevent`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script execution
+UPDATE `SiPbxDomain`.`element_domain` SET `app_address` = '172.16.2.12:5081', `element_id` = 'ncs', `element_start_time` = 'Thu, 29 May 2025 01:47:08 GMT', `element_status` = 'Running', `element_type` = 'NCS', `element_version` = 'v44-3-0', `hostname` = 'core2-ord.sgdemothree.ucaas.tech', `ip_address` = '172.16.2.12', `mac_address` = '02:00:17:02:3B:D7', `status_update_time` = 'Mon, 09 Jun 2025 00:19:09 GMT', `wan_address` = '172.16.2.12:5081' WHERE `SiPbxDomain`.`element_domain`.`element_id` = 'ncs' AND `SiPbxDomain`.`element_domain`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'sipbx' AND `Systemevent`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'sipbx' AND `Systemevent`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script execution
+SELECT COUNT(*) AS `count` FROM `SiPbxDomain`.`element_domain` AS `Systemevent` WHERE `Systemevent`.`element_id` = 'sipbx' AND `Systemevent`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script execution
+UPDATE `SiPbxDomain`.`element_domain` SET `app_address` = '172.16.2.12:5060', `app_address_v6` = '[2603:c028:4505:1d00::2695]:5060', `element_id` = 'sipbx', `element_start_time` = 'Thu, 29 May 2025 01:47:00 GMT', `element_status` = 'Running', `element_type` = 'SiPBx', `element_version` = 'v44-3-0', `hostname` = 'core2-ord.sgdemothree.ucaas.tech', `ip_address` = '172.16.2.12', `mac_address` = '02:00:17:02:3B:D7', `status_update_time` = 'Mon, 09 Jun 2025 00:19:09 GMT', `wan_address` = '64.181.199.31:5060' WHERE `SiPbxDomain`.`element_domain`.`element_id` = 'sipbx' AND `SiPbxDomain`.`element_domain`.`mac_address` = '02:00:17:02:3B:D7'
+
+2025-06-09 00:19:09 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+
+2025-06-09 00:19:11 Debug: sev-test-comp 
+{"data":{"tmpFile":{"adapterType":"local","adapterConfig":{"basePath":"\/tmp\/upload\/","syncSbus":"1","dirCreateMode":"493","fileCreateMode":"420"}},"mmsFile":{"adapterType":"local","adapterConfig":{"basePath":"\/usr\/local\/NetSapiens\/SiPbx\/media\/","syncSbus":"1","dirCreateMode":"488","fileCreateMode":"416"}},"dlFile":{"adapterType":"local","adapterConfig":{"basePath":"\/var\/www\/html\/mdl\/","syncSbus":"1","dirCreateMode":"488","fileCreateMode":"416"}}}}
+
+2025-06-09 00:19:11 Messaging: (Messages.read_messagesessions) form 
+{"data":{"return":"1","queue_status":["queued","dispatching","active"],"action":"processQueuedSMS","agent":"agentcheck"},"requestParams":{"params":{"plugin":null,"controller":"messages","action":"processQueuedSMS","named":{"form":{"object":"sms","action":"processQueuedSMS"}},"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":[],"query":{"object":"sms","action":"processQueuedSMS"},"url":"messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS"}}
+
+2025-06-09 00:19:11 Messaging: this is messagesession read conditions: 
+{"data":{"object":"messagesession","last_timestamp NOT":"0000-00-00 00:00:00","order":"last_timestamp desc","last_timestamp >=":"2025-06-08 00:19:11","OR":[{"queue_status":"queued"},{"queue_status":"dispatching"},{"queue_status":"active"}]},"requestParams":{"params":{"plugin":null,"controller":"messages","action":"processQueuedSMS","named":{"form":{"object":"sms","action":"processQueuedSMS"}},"pass":[],"return":0,"autoRender":1,"url":[],"bare":1,"requested":1},"data":[],"query":{"object":"sms","action":"processQueuedSMS"},"url":"messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS","base":"\/ns-api","webroot":"\/ns-api\/","here":"\/ns-api\/messages\/processQueuedSMS\/form%5Bobject%5D:sms\/form%5Baction%5D:processQueuedSMS"}}
+
+2025-06-09 00:19:11 Debug: (Messagesession) query 
+{"data":{"conditions":{"last_timestamp NOT":"0000-00-00 00:00:00","last_timestamp >=":"2025-06-08 00:19:11","OR":[{"queue_status":"queued"},{"queue_status":"dispatching"},{"queue_status":"active"}]},"order":"last_timestamp desc"}}
+
+2025-06-09 00:19:11 Debug: (Nssql::_execute) SQL script execution
+SELECT `Messagesession`.`session_id`, `Messagesession`.`user`, `Messagesession`.`domain`, `Messagesession`.`remote`, `Messagesession`.`smsani`, `Messagesession`.`last_timestamp`, `Messagesession`.`start_timestamp`, `Messagesession`.`last_mesg`, `Messagesession`.`last_sender`, `Messagesession`.`last_status`, `Messagesession`.`muted`, `Messagesession`.`last_email`, `Messagesession`.`rx_hostname`, `Messagesession`.`term_queue`, `Messagesession`.`queue_status`, `Messagesession`.`queue_session_id`, `Messagesession`.`agent_start_timestamp`, `Messagesession`.`last_mesg_type`, `Messagesession`.`last_mesg_media_type`, `Messagesession`.`last_mesg_media_size`, `Messagesession`.`session_type`, `Messagesession`.`session_name`, `Messagesession`.`participants` FROM `MessagingDomain`.`session` AS `Messagesession` WHERE NOT (`last_timestamp` = '0000-00-00 00:00:00') AND `last_timestamp` >= '2025-06-08 00:19:11' AND ((`queue_status` = 'queued') OR (`queue_status` = 'dispatching') OR (`queue_status` = 'active')) ORDER BY `last_timestamp` desc
+
+2025-06-09 00:19:11 Debug: (Nssql::_execute) SQL script runtime = 0ms]
+

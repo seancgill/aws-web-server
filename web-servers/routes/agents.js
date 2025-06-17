@@ -1,0 +1,1 @@
+Directory not found: ENOENT: no such file or directory, access '/home/ubuntu/logs/download'
