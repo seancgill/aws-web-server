@@ -12,10 +12,11 @@ callerids-inject-inventory.txt
 
 # Logs
 # git add routes/callerIDsRoute.js
-# git commit -m "Add caller ids in inventory iframe"
+# git commit -m "eventsub-calls endpoint added"
 # git push origin main
 
 # aws pull
+# cd web
 # git pull origin main
 log/
 app.log

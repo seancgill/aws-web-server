@@ -201,7 +201,11 @@ app.use("/", authenticateToken, messageRoutes);
 const cors = require("cors");
 app.use(
   cors({
-    origin: ["https://portal.sgdemothree.ucaas.tech", "https://*.ucaas.tech"],
+    origin: [
+      "https://portal.sgdemothree.ucaas.tech",
+      "https://*.ucaas.tech",
+      "https://*.podium-dev.com",
+    ],
     methods: ["GET", "POST", "OPTIONS"],
     allowedHeaders: [
       "Content-Type",
