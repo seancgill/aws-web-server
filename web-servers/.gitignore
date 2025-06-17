@@ -6,6 +6,9 @@ package-lock.json  # Optional: Keep if you want exact dependency versions
 # Environment variables
 .env
 
+# Internal Notes
+sgdemo-aws.work.txt
+
 # Logs
 # git remote add origin https://github.com/seancgill/aws-web-server.git
 log/
