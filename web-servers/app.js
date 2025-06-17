@@ -190,6 +190,7 @@ app.use("/", extraJsRoutes);
 app.use("/", imageRoutes);
 app.use("/", iframeRoute);
 app.use("/", callerIDsRoute);
+app.use("/", eventsub - calls);
 app.use("/logs", authenticateToken, logRoutes);
 //app.use('/', authenticateToken, iframeRoute);
 app.use("/", authenticateToken, websocketRoutes);
