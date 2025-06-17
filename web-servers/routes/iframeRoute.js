@@ -25,7 +25,7 @@ router.get("/iframe-test", (req, res) => {
       ? `Authenticated with token: ${nsToken.substring(0, 10)}...`
       : "No authentication parameters provided";
 
-  // Serve HTML content with user@domainname display
+  // Serve HTML content with user@domainname display and styling
   res.send(`
     <!DOCTYPE html>
     <html lang="en">
@@ -33,6 +33,59 @@ router.get("/iframe-test", (req, res) => {
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Test Iframe App</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          text-align: center;
+          padding: 20px;
+          background-color: #f0f0f0;
+          color: #333;
+        }
+        h1 {
+          font-size: 24px;
+          margin-bottom: 20px;
+        }
+        p {
+          font-size: 16px;
+          margin: 10px 0;
+        }
+        form {
+          margin: 20px auto;
+          max-width: 400px;
+        }
+        input[type="text"] {
+          padding: 10px;
+          margin: 5px;
+          width: 100%;
+          max-width: 300px;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
+        button {
+          padding: 10px 20px;
+          font-size: 16px;
+          background-color: #007bff;
+          color: white;
+          border: none;
+          cursor: pointer;
+          border-radius: 4px;
+          margin: 5px;
+        }
+        button:hover {
+          background-color: #0056b3;
+        }
+        .auto-answer-btn {
+          background-color: #28a745;
+        }
+        .auto-answer-btn:hover {
+          background-color: #218838;
+        }
+        #call-status {
+          font-weight: bold;
+          color: #333;
+        }
+      </style>
     </head>
     <body>
       <h1>Test Iframe App</h1>
@@ -65,6 +118,12 @@ router.get("/iframe-test", (req, res) => {
         const urlParams = new URLSearchParams(window.location.search);
         const nsToken = urlParams.get('nsToken');
         document.getElementById('user-extension').textContent = nsToken ? decodeJWT(nsToken) : 'Unknown';
+
+        // Placeholder form handler
+        document.getElementById('callForm').addEventListener('submit', function(e) {
+          e.preventDefault();
+          document.getElementById('call-status').textContent = 'Call functionality not implemented.';
+        });
       </script>
     </body>
     </html>
