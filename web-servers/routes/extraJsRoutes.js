@@ -12,8 +12,8 @@ router.get("/get-script/:custID/ver1", (req, res) => {
     return res.status(400).send("Invalid custID");
   }
 
-  // Validate website URL format (basic check)
-  if (!/^[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]+$/.test(website)) {
+  // Validate website URL format (improved regex)
+  if (!/^(https?:\/\/)?[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]+$/.test(website)) {
     return res.status(400).send("Invalid website URL");
   }
 
@@ -98,8 +98,8 @@ router.get("/ord/:custID/ver1", (req, res) => {
     return res.status(400).send("Invalid custID");
   }
 
-  // Validate website URL format (basic check)
-  if (!/^[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]+$/.test(website)) {
+  // Validate website URL format (improved regex)
+  if (!/^(https?:\/\/)?[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]+$/.test(website)) {
     return res.status(400).send("Invalid website URL");
   }
 
@@ -184,8 +184,8 @@ router.get("/ord/:custID/ver2", (req, res) => {
     return res.status(400).send("Invalid custID");
   }
 
-  // Validate website URL format (basic check)
-  if (!/^[a-zA-Z0-9-._~:/?#[\]@!$&'()*+,;=]+$/.test(website)) {
+  // Validate website URL format (improved regex to support full URLs)
+  if (!/^(https?:\/\/)?[\w.-]+(\.[\w.-]+)+[/#?]?.*$/.test(website)) {
     return res.status(400).send("Invalid website URL");
   }
 
@@ -196,7 +196,7 @@ router.get("/ord/:custID/ver2", (req, res) => {
   }
   color = `#${color}`; // Ensure color has leading # for CSS
 
-  // JavaScript code with dynamic custID, website, and color
+  // JavaScript code with dynamic custID, website, and color, including Caller IDs feature
   const jsCode = `
 if (typeof $ === 'undefined') {
     console.error('jQuery is not available. Cannot add toolbar links or modify login box.');
