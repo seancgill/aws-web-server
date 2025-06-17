@@ -8,9 +8,15 @@ package-lock.json  # Optional: Keep if you want exact dependency versions
 
 # Internal Notes
 sgdemo-aws.work.txt
+callerids-inject-inventory.txt
 
 # Logs
-# git remote add origin https://github.com/seancgill/aws-web-server.git
+# git add routes/callerIDsRoute.js
+# git commit -m "Add caller ids in inventory iframe"
+# git push origin main
+
+# aws pull
+# git pull origin main
 log/
 app.log
 
