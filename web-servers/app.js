@@ -16,6 +16,7 @@ const logRoutes = require("./routes/logRoutes");
 const cnamRoutes = require("./routes/cnamRoutes");
 const messageRoutes = require("./routes/messageRoutes");
 const callerIDsRoute = require("./routes/callerIDsRoute");
+const eventsubCallsRoute = require("./routes/eventsubCalls");
 
 const app = express();
 const port = 443; // HTTPS port
@@ -190,7 +191,7 @@ app.use("/", extraJsRoutes);
 app.use("/", imageRoutes);
 app.use("/", iframeRoute);
 app.use("/", callerIDsRoute);
-app.use("/", eventsub - calls);
+app.use("/", eventsubCallsRoute);
 app.use("/logs", authenticateToken, logRoutes);
 //app.use('/', authenticateToken, iframeRoute);
 app.use("/", authenticateToken, websocketRoutes);
