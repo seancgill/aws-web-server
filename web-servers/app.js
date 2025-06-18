@@ -43,46 +43,45 @@ const logger = winston.createLogger({
   ],
 });
 
-// IP Whitelist
-const allowedIps = [
-  "::ffff:170.9.227.139", // sgdemothree core1
-  "::ffff:127.0.0.1", // Localhost for testing
-  "::ffff:64.181.199.31", // sgdemothree core2
-  "::ffff:170.9.240.111", // tango-evp core1
-  "::ffff:207.211.178.176", // tango-evp core2
-  "::ffff:64.181.193.101", // telserco eval core1
-  "::ffff:170.9.237.96", // telserco eval core2
-];
-
-// IP Whitelist Middleware (applied to all routes)
-app.use((req, res, next) => {
-  const clientIp = req.ip;
-  if (!allowedIps.includes(clientIp)) {
-    logger.warn("Unauthorized IP access", {
-      requestId: req.requestId || uuidv4(),
-      ip: clientIp,
-      method: req.method,
-      url: req.url,
-      userAgent: req.get("User-Agent"),
-    });
-    return res.status(403).json({ error: "Forbidden: Unauthorized IP" });
-  }
-  logger.debug("IP allowed", { requestId: req.requestId, ip: clientIp });
-  next();
-});
-
 // Middleware to parse JSON and URL-encoded bodies
 app.use(express.json({ limit: "1mb" })); // Limit body size to 1MB
 app.use(express.urlencoded({ extended: true }));
 
-// Add rate limiting middleware
+// Bot detection and method filtering
+app.use((req, res, next) => {
+  const blockedMethods = ["PROPFIND", "HEAD", "TRACE", "DELETE", "PUT"];
+  const suspiciousPaths = ["/wp-login.php", "/.env", "/admin"];
+  if (
+    blockedMethods.includes(req.method) ||
+    suspiciousPaths.includes(req.path)
+  ) {
+    logger.warn("Suspicious request blocked", {
+      requestId: uuidv4(),
+      method: req.method,
+      path: req.path,
+      ip: req.ip,
+      userAgent: req.get("User-Agent"),
+    });
+    return res.status(403).json({ error: "Forbidden: Suspicious request" });
+  }
+  next();
+});
+
+// Rate limiting middleware
 const rateLimit = require("express-rate-limit");
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // Increased to allow more webhook requests
-  skip: (req) => allowedIps.includes(req.ip), // Skip for trusted IPs
+  max: 50, // Limit each IP to 50 requests per window
+  message: { error: "Too many requests, please try again later" },
 });
 app.use(limiter);
+
+// Specific rate limiting for /cnam
+const cnamLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100, // Allow more for CNAM lookups
+  message: { error: "Too many CNAM requests, please try again later" },
+});
 
 // Middleware to log all incoming requests with detailed info
 app.use((req, res, next) => {
@@ -111,9 +110,12 @@ app.use((req, res, next) => {
     userAgent: req.get("User-Agent"),
   });
 
-  // Specifically log /messages requests
-  if (req.path === "/messages" && req.method === "POST") {
-    logger.info("Messages endpoint request", {
+  // Specifically log /messages and /cnam requests
+  if (
+    (req.path === "/messages" && req.method === "POST") ||
+    req.path === "/cnam"
+  ) {
+    logger.info(`${req.path} endpoint request`, {
       requestId: req.requestId,
       body: req.body,
       query: req.query,
@@ -187,7 +189,7 @@ app.get("/", (req, res) => {
             <p>WSS status: <span id="wss-status">Disconnected</span></p>
             <script src="/socket.io/socket.io.js"></script>
             <script>
-              const socket = io('https://sgdemo-aws.work', { transports: ['websocket'] });
+              const socket = io('https://sgdemo-aws.work', { transports: ['websocket'], auth: { token: 'your_api_key_here' } });
               socket.on('connect', () => {
                 document.getElementById('socketio-status').textContent = 'Connected';
               });
@@ -223,18 +225,31 @@ app.use("/", callerIDsRoute);
 app.use("/", eventsubCallsRoute);
 app.use("/logs", authenticateToken, logRoutes);
 app.use("/", authenticateToken, websocketRoutes);
-app.use("/", authenticateToken, cnamRoutes);
+app.use("/cnam", cnamLimiter, authenticateToken, cnamRoutes); // CNAM with specific rate limiting
 app.use("/", authenticateToken, messageRoutes);
 
 // Add CORS headers
 const cors = require("cors");
+// Global CORS for POST/OPTIONS
 app.use(
   cors({
     origin: [
       "https://portal.sgdemothree.ucaas.tech",
       "https://core1-ord.sgdemothree.ucaas.tech",
     ],
-    methods: ["GET", "POST", "OPTIONS"],
+    methods: ["POST", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Correlation-Id"],
+  })
+);
+// Route-specific CORS for /cnam to allow GET
+app.use(
+  "/cnam",
+  cors({
+    origin: [
+      "https://portal.sgdemothree.ucaas.tech",
+      "https://core1-ord.sgdemothree.ucaas.tech",
+    ],
+    methods: ["GET", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization", "X-Correlation-Id"],
   })
 );
@@ -263,7 +278,7 @@ httpApp.all("*", (req, res) => {
 });
 const httpServer = http.createServer(httpApp);
 
-// Initialize Socket.IO
+// Initialize Socket.IO with authentication
 const io = socketIo(httpsServer, {
   path: "/socket.io",
   cors: {
@@ -274,6 +289,18 @@ const io = socketIo(httpsServer, {
     methods: ["GET", "POST"],
   },
 });
+io.use((socket, next) => {
+  const token = socket.handshake.auth.token;
+  const validApiKeys = process.env.API_KEYS
+    ? process.env.API_KEYS.split(",")
+    : [];
+  if (validApiKeys.includes(token)) {
+    next();
+  } else {
+    logger.warn("Unauthorized Socket.IO connection", { token });
+    next(new Error("Unauthorized"));
+  }
+});
 io.on("connection", (socket) => {
   logger.info("Socket.IO client connected", { socketId: socket.id });
   socket.emit("message", "Welcome to the WebSocket server!");
@@ -282,10 +309,19 @@ io.on("connection", (socket) => {
   });
 });
 
-// Initialize WebSocket (WSS)
+// Initialize WebSocket (WSS) with authentication
 const wss = new WebSocket.Server({ server: httpsServer, path: "/wss-stream" });
 wss.on("connection", (ws, req) => {
   const params = url.parse(req.url, true).query;
+  const token = params.token;
+  const validApiKeys = process.env.API_KEYS
+    ? process.env.API_KEYS.split(",")
+    : [];
+  if (!validApiKeys.includes(token)) {
+    logger.warn("Unauthorized WSS connection", { token });
+    ws.close(1008, "Unauthorized");
+    return;
+  }
   logger.info("WSS client connected", { queryParams: params });
   ws.on("message", (message) => {
     logger.info("WSS received", { message: message.toString() });
