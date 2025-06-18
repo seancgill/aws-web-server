@@ -43,15 +43,44 @@ const logger = winston.createLogger({
   ],
 });
 
+// IP Whitelist
+const allowedIps = [
+  "::ffff:170.9.227.139", // sgdemothree core1
+  "::ffff:127.0.0.1", // Localhost for testing
+  "::ffff:64.181.199.31", // sgdemothree core2
+  "::ffff:170.9.240.111", // tango-evp core1
+  "::ffff:207.211.178.176", // tango-evp core2
+  "::ffff:64.181.193.101", // telserco eval core1
+  "::ffff:170.9.237.96", // telserco eval core2
+];
+
+// IP Whitelist Middleware (applied to all routes)
+app.use((req, res, next) => {
+  const clientIp = req.ip;
+  if (!allowedIps.includes(clientIp)) {
+    logger.warn("Unauthorized IP access", {
+      requestId: req.requestId || uuidv4(),
+      ip: clientIp,
+      method: req.method,
+      url: req.url,
+      userAgent: req.get("User-Agent"),
+    });
+    return res.status(403).json({ error: "Forbidden: Unauthorized IP" });
+  }
+  logger.debug("IP allowed", { requestId: req.requestId, ip: clientIp });
+  next();
+});
+
 // Middleware to parse JSON and URL-encoded bodies
 app.use(express.json({ limit: "1mb" })); // Limit body size to 1MB
 app.use(express.urlencoded({ extended: true }));
 
-// Add rate limiting middleware HERE
+// Add rate limiting middleware
 const rateLimit = require("express-rate-limit");
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10, // Limit each IP to 100 requests per window
+  max: 100, // Increased to allow more webhook requests
+  skip: (req) => allowedIps.includes(req.ip), // Skip for trusted IPs
 });
 app.use(limiter);
 
@@ -76,7 +105,7 @@ app.use((req, res, next) => {
     url: req.url,
     path: req.path,
     query: req.query,
-    body: req.body, // Include request body
+    body: req.body,
     ip: req.ip,
     headers: maskedHeaders,
     userAgent: req.get("User-Agent"),
@@ -131,7 +160,7 @@ const authenticateToken = (req, res, next) => {
   if (validApiKeys.includes(token)) {
     logger.info("API key verified", {
       requestId: req.requestId,
-      apiKey: `${token.slice(0, 4)}...${token.slice(-4)}`, // Mask API key
+      apiKey: `${token.slice(0, 4)}...${token.slice(-4)}`,
     });
     req.client = { apiKey: token };
     next();
@@ -193,7 +222,6 @@ app.use("/", iframeRoute);
 app.use("/", callerIDsRoute);
 app.use("/", eventsubCallsRoute);
 app.use("/logs", authenticateToken, logRoutes);
-//app.use('/', authenticateToken, iframeRoute);
 app.use("/", authenticateToken, websocketRoutes);
 app.use("/", authenticateToken, cnamRoutes);
 app.use("/", authenticateToken, messageRoutes);
@@ -204,25 +232,13 @@ app.use(
   cors({
     origin: [
       "https://portal.sgdemothree.ucaas.tech",
-      "https://*.ucaas.tech",
-      "https://*.podium-dev.com",
+      "https://core1-ord.sgdemothree.ucaas.tech",
     ],
     methods: ["GET", "POST", "OPTIONS"],
-    allowedHeaders: [
-      "Content-Type",
-      "Authorization",
-      "Origin",
-      "X-Requested-With",
-      "Accept",
-    ],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Correlation-Id"],
   })
 );
-// Remove old CORS middleware
-// app.use((req, res, next) => {
-//     res.header('Access-Control-Allow-Origin', '*');
-//     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
-//     next();
-// });
+
 // Catch-all for unmatched routes
 app.use((req, res) => {
   logger.info("Unmatched route", {
@@ -251,7 +267,10 @@ const httpServer = http.createServer(httpApp);
 const io = socketIo(httpsServer, {
   path: "/socket.io",
   cors: {
-    origin: "*",
+    origin: [
+      "https://portal.sgdemothree.ucaas.tech",
+      "https://core1-ord.sgdemothree.ucaas.tech",
+    ],
     methods: ["GET", "POST"],
   },
 });
