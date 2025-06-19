@@ -223,9 +223,9 @@ app.use("/", imageRoutes);
 app.use("/", iframeRoute);
 app.use("/", callerIDsRoute);
 app.use("/", eventsubCallsRoute);
+app.use("/cnam", cnamLimiter, cnamRoutes); // CNAM with specific rate limiting
 app.use("/logs", authenticateToken, logRoutes);
 app.use("/", authenticateToken, websocketRoutes);
-app.use("/cnam", cnamLimiter, authenticateToken, cnamRoutes); // CNAM with specific rate limiting
 app.use("/", authenticateToken, messageRoutes);
 
 // Add CORS headers

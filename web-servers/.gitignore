@@ -38,3 +38,6 @@ Thumbs.db
 # SSL certificates (if stored locally)
 *.pem
 *.key
+
+# Notes n stuff
+Cust_Keys/
