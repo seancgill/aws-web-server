@@ -12,7 +12,7 @@ callerids-inject-inventory.txt
 
 # Logs
 # git add routes/callerIDsRoute.js
-# git commit -m "eventsub-calls endpoint added"
+# git commit -m "cnam auth token removed"
 # git push origin main
 
 # aws pull
