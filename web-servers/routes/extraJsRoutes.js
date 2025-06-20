@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 
-// Dynamic endpoint for /get-script/:custID/ver1
-router.get("/get-script/:custID/ver1", (req, res) => {
+// Dynamic endpoint for /ord/:custID/ver1
+router.get("/ord/:custID/ver1", (req, res) => {
   const custID = req.params.custID; // Extract custID from URL
   const website = req.query.website || "https://netsapiens.com"; // Extract website from query, default to netsapiens.com
   let color = req.query.color || "white"; // Extract color from query, default to white
@@ -88,7 +88,7 @@ if (typeof $ === 'undefined') {
 });
 
 // Dynamic endpoint for /ord/:custID/ver1
-router.get("/ord/:custID/ver1", (req, res) => {
+router.get("/phx/:custID/ver1", (req, res) => {
   const custID = req.params.custID; // Extract custID from URL
   const website = req.query.website || "https://netsapiens.com"; // Extract website from query, default to netsapiens.com
   let color = req.query.color || "white"; // Extract color from query, default to white
@@ -149,7 +149,7 @@ if (typeof $ === 'undefined') {
             var paybill = '<li><a href="${website}" target="_blank" class="header-link">Business Website</a></li>';
             var api = '<li><a href="https://docs.ns-api.com/reference/" target="_blank" class="header-link">API Docs</a></li>';
             var Docs = '<li><a href="https://documentation.netsapiens.com" target="_blank" class="header-link">Documentation</a></li>';
-            var adminTools = '<li class="dropdown"><a href="https://core1-ord.${custID}.ucaas.tech/admin" class="dropdown-toggle header-link" data-toggle="dropdown">Admin UI<span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="https://core1-ord.${custID}.ucaas.tech/SiPbx" target="_blank">SiPbx (Core) Admin</a></li><li><a href="https://core2-ord.${custID}.ucaas.tech/ndp" target="_blank">NDP (Endpoints) Admin</a></li><li><a href="https://core1-ord.${custID}.ucaas.tech/LiCf/adminlogin.php" target="_blank">LiCf (Recording) Admin</a></li><li><a href="https://insight.netsapiens.com" target="_blank">Insight</a></li></ul></li>';
+            var adminTools = '<li class="dropdown"><a href="https://core1-phx.${custID}.ucaas.tech/admin" class="dropdown-toggle header-link" data-toggle="dropdown">Admin UI<span class="caret"></span></a><ul class="dropdown-menu" role="menu"><li><a href="https://core1-phx.${custID}.ucaas.tech/SiPbx" target="_blank">SiPbx (Core) Admin</a></li><li><a href="https://core2-phx.${custID}.ucaas.tech/ndp" target="_blank">NDP (Endpoints) Admin</a></li><li><a href="https://core1-phx.${custID}.ucaas.tech/LiCf/adminlogin.php" target="_blank">LiCf (Recording) Admin</a></li><li><a href="https://insight.netsapiens.com" target="_blank">Insight</a></li></ul></li>';
 
             $toolbar.prepend(paybill);
             $toolbar.prepend(api);
