@@ -11,13 +11,7 @@ sgdemo-aws.work.txt
 callerids-inject-inventory.txt
 
 # Logs
-# git add routes/callerIDsRoute.js
-# git commit -m "cnam auth token removed"
-# git push origin main
 
-# aws pull
-# cd web
-# git pull origin main
 log/
 app.log
 
